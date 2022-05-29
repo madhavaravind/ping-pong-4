@@ -58,9 +58,11 @@ function gotPoses(results) {
 }
 function startGame() {
 game_status="start";
-document.getElementById("status").innerHTML="game is loading";
+document.getElementById("status").innerHTML="game is loaded";
 }
 function draw() {
+if(game_status=="start"){
+
 
   background(0);
 
@@ -101,7 +103,7 @@ function draw() {
   //function move call which in very important
   move();
 }
-
+}
 
 
 //function reset when ball does notcame in the contact of padde
