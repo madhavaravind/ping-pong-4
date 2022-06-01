@@ -30,11 +30,11 @@ game_status = "";
 
 function preload() {
   ball_touch_paddel = loadSound("ball_touch_paddel.wav");
-  missed=loadSound("missed.wav");
-  }
+  missed = loadSound("missed.wav");
+}
 
 function setup() {
-  createCanvas(700, 600);
+  var canvas = createCanvas(700, 600);
   canvas.parent('canvas');
   video = createCapture(VIDEO);
   video.size(600, 300);
@@ -56,53 +56,55 @@ function gotPoses(results) {
     console.log(scoreRightWrist);
   }
 }
+
 function startGame() {
-game_status="start";
-document.getElementById("status").innerHTML="game is loaded";
+  game_status = "start";
+  document.getElementById("status").innerHTML = "game is loading";
 }
+
 function draw() {
-if(game_status=="start"){
+  if (game_status == "start") {
+    document.getElementById("status").innerHTML = "Game Is Loaded"; //funtion paddleInCanvas call paddleInCanvas();
+
+    background(0);
+
+    fill("black");
+    stroke("black");
+    rect(680, 0, 20, 700);
+
+    fill("black");
+    stroke("black");
+    rect(0, 0, 20, 700);
+
+    //funtion paddleInCanvas call 
+    paddleInCanvas();
+
+    //left paddle
+    fill(250, 0, 0);
+    stroke(0, 0, 250);
+    strokeWeight(0.5);
+    paddle1Y = mouseY;
+    rect(paddle1X, paddle1Y, paddle1, paddle1Height, 100);
 
 
-  background(0);
+    //pc computer paddle
+    fill("#FFA500");
+    stroke("#FFA500");
+    var paddle2y = ball.y - paddle2Height / 2;
+    rect(paddle2Y, paddle2y, paddle2, paddle2Height, 100);
 
-  fill("black");
-  stroke("black");
-  rect(680, 0, 20, 700);
+    //function midline call
+    midline();
 
-  fill("black");
-  stroke("black");
-  rect(0, 0, 20, 700);
+    //funtion drawScore call 
+    drawScore();
 
-  //funtion paddleInCanvas call 
-  paddleInCanvas();
+    //function models call  
+    models();
 
-  //left paddle
-  fill(250, 0, 0);
-  stroke(0, 0, 250);
-  strokeWeight(0.5);
-  paddle1Y = mouseY;
-  rect(paddle1X, paddle1Y, paddle1, paddle1Height, 100);
-
-
-  //pc computer paddle
-  fill("#FFA500");
-  stroke("#FFA500");
-  var paddle2y = ball.y - paddle2Height / 2;
-  rect(paddle2Y, paddle2y, paddle2, paddle2Height, 100);
-
-  //function midline call
-  midline();
-
-  //funtion drawScore call 
-  drawScore();
-
-  //function models call  
-  models();
-
-  //function move call which in very important
-  move();
-}
+    //function move call which in very important
+    move();
+  }
 }
 
 
